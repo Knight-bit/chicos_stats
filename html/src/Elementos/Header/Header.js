@@ -1,26 +1,43 @@
 import React from 'react';
+import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import {makeStyles} from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+    root:{
+        backgroundColor : 'black',
+        color : 'white',
+    }
+    
+})
+
 
 export default function Header(){
     const [value, setValue] = React.useState(0);
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
+
+
+    const checkDefault = (e) => {
+        console.log(e);
+    }
+
+    const classes = useStyles();
+    return(
+        <div>
+            <AppBar position='static' className={classes.root}>
+                <Tabs value={value} onChange={(event, newValue) => setValue(newValue)}>
+                    <Tab label="Gela"/>
+                </Tabs>
+            </AppBar>
+        </div>
+    )
+}
+
+const Panel = (props) => {
+    const {children, value, ...other} = props;
     return(
         <>
-        <div >
-        <Tabs
-            orientation="vertical"
-            variant="scrollable"
-            value={value}
-            onChange={handleChange}
-            aria-label="Vertical tabs example"
-            
-        />
-        </div>
+        <h1>{children} {value}</h1>
         </>
     )
 }
