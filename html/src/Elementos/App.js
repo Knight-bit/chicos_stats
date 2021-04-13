@@ -1,10 +1,12 @@
-import Header from './Header/Header';
+import ListaDesplegable from './ListaDesplegable/ListaDesplegable'
+
+
 
 export default function App(){
 
     return (
         <>
-            <Header />
+            <ListaDesplegable />
             <h1>Ohaiho</h1>
         </>
     )
