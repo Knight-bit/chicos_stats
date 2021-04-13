@@ -47,7 +47,10 @@ const useStyles = makeStyles((theme) => ({
         paddingLeft: theme.spacing(4),
     },
     img : {
-        
+        width: 32,
+        height: 32,
+        borderRadius : 50,
+        marginRight: 5,
     }
 }))
 
@@ -62,17 +65,15 @@ export default function Header(){
     return(
         <div>
             <Button onClick={handleClick} className={classes.root}>
-            <ListItemIcon>
                 <ListItemText>
                     <Typography>Friends</Typography>
                 </ListItemText>
-            </ListItemIcon>
             {open ? <ExpandLess /> : <ExpandMore />}
                 <Collapse in={open} timeout="auto" unmountOnExit>
                     <List component='div' className={classes.nested}>
                         {datos.length !== 0? datos.map((_) => (
                             <ListItem button className={classes.nested}>
-                                <img src={_.url_avatar} width={32} height={32}/>
+                                <img className={classes.img} src={_.url_avatar}/>
                                 <ListItemText>
                                     <Typography>{_.name}</Typography>
                                 </ListItemText>
