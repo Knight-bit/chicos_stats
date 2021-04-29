@@ -1,13 +1,18 @@
-import ListaDesplegable from './ListaDesplegable/ListaDesplegable'
-
-
+import ListaDesplegable from './ListaDesplegable/ListaDesplegable';
+import ContainerAmigoData from './ContainerAmigoData/ContainerAmigoData';
+import CharHeroe from './CharHeroe/CharHeroe';
 
 export default function App(){
 
+    
     return (
         <>
-            <ListaDesplegable />
-            <h1>Ohaiho</h1>
+        <ListaDesplegable />
+        <ContainerAmigoData />
         </>
     )
 }
+/*
+
+<CharHeroe  name='mati'/>
+*/
