@@ -11,11 +11,15 @@ import {ExpandMore} from '@material-ui/icons';
 import {Grid} from '@material-ui/core'
 import axios from 'axios';
 
+
+import ContainerAmigoData from '../ContainerAmigoData/ContainerAmigoData';
+import CharHeroe from '../CharHeroe/CharHeroe';
+
 const useStyles = makeStyles((theme) => ({
     root:{
         backgroundColor : 'inherit',
         color : 'inherit',
-        maxWidth : 360,
+        minHeight : 500
     },
     nested :{
         paddingLeft: theme.spacing(4),
@@ -34,14 +38,11 @@ const getStats = async () => {
 
     return stats.data
 }
-const handleItem = (e) => { 
-    
-}
 
 export default function Header(){
     const [open, setValue] = React.useState(false);
     const [data, setData] = React.useState([]);
-
+    const [chico, setChico] = React.useState('gela')
 
     React.useEffect(async () =>{ 
         const data = await getStats();
@@ -51,20 +52,36 @@ export default function Header(){
     const handleClick = () => {
         setValue(!open);
     }
+
+    const handleItem = (e) => { 
+        console.log(e.currentTarget.getAttribute('name'));
+        try{
+            document.getElementById('perfil').removeChild(document.getElementById('perfil').firstChild)
+        }catch(e){
+            
+        }
+    }
+
     const classes = useStyles();
     return(
         <div>
-            <Grid container spacing={2}>
-                <Grid item xs={4}>
+            <Grid container spacing={2} className={classes.root}>
 
+
+
+                <Grid item xs={6} sm={4} id='perfil'>
+                     <ContainerAmigoData />
                 </Grid>
-                <Grid item xs={4}>
 
+
+
+
+                <Grid item xs={6} sm={4} id='chart'>
+                    <CharHeroe name={chico}/>
                 </Grid>
-                <Grid item xs={4}>
-
                 
-                <Button onClick={handleClick} className={classes.root}>
+                <Grid item xs={6} sm={4}>
+                <Button onClick={handleClick} >
                     <ListItemText>
                         <Typography>Friends</Typography>
                     </ListItemText>
@@ -72,7 +89,7 @@ export default function Header(){
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <List component='div' className={classes.nested}>
                             {data.length !== 0? data.map((_) => (
-                                <ListItem button className={classes.nested} key={_._id} onClick={handleItem(_)}>
+                                <ListItem button className={classes.nested} key={_._id} name={_.name} onClick={handleItem}>
                                     <img className={classes.img} src={_.avatar}/>
                                     <ListItemText>
                                         <Typography>{_.personaname}</Typography>
